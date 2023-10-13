@@ -1,0 +1,205 @@
+"'gallery screen' As screen":
+    OnVisible: =Select(icnRefresh)
+
+    "glrProjectManagement As gallery.'BrowseLayout_Vertical_OneTextVariant_ver5.0'":
+        BorderColor: =RGBA(219, 219, 219, 1)
+        BorderThickness: =1
+        DelayItemLoading: =true
+        Height: =245
+        Items: |-
+            =Filter(
+                colProjectManagement,
+                txtSearch.Text in Employee
+            )
+        Layout: =Layout.Vertical
+        LoadingSpinner: =LoadingSpinner.Data
+        TemplatePadding: =0
+        TemplateSize: =80
+        Width: =1105
+        X: =92
+        Y: =228
+        ZIndex: =1
+
+        txtName As label:
+            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.Employee
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 850
+            X: =16
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =1
+
+        Separator2 As rectangle:
+            BorderColor: =RGBA(202, 202, 202, 1)
+            BorderThickness: =1
+            Height: =2
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - Self.Height
+            ZIndex: =3
+
+        Rectangle2 As rectangle:
+            Height: =Parent.TemplateHeight - Separator2.Height
+            OnSelect: =Select(Parent)
+            Visible: =ThisItem.IsSelected
+            Width: =4
+            ZIndex: =4
+
+        txtProject As label:
+            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.Project
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 850
+            X: =261
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =5
+
+        txtComment As label:
+            Align: =Align.Justify
+            AutoHeight: =true
+            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+            Height: =53
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.Comment
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 850
+            X: =521
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =6
+
+        txtLastModifiedDate As label:
+            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+            Height: =26
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.Modified
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 850
+            X: =832
+            Y: =27
+            ZIndex: =7
+
+        icnNextArrow As icon.NextArrow:
+            Height: =51
+            Icon: =Icon.NextArrow
+            OnSelect: |-
+                =Navigate('detail screen',ScreenTransition.Cover,{varDisplayProject:ThisItem})
+            Width: =39
+            X: =1030
+            Y: =14
+            ZIndex: =8
+
+    lblHeader As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 255, 255, 1)
+        Fill: =RGBA(56, 96, 178, 1)
+        Height: =84
+        Size: =33
+        Text: ="Project Team Management"
+        Width: =1345
+        X: =10
+        Y: =6
+        ZIndex: =2
+
+    lblNameHeader As label:
+        Font: =Font.Lato
+        FontWeight: =FontWeight.Semibold
+        Size: =16
+        Text: ="Name"
+        X: =110
+        Y: =189
+        ZIndex: =3
+
+    lblProjectHeader As label:
+        Font: =Font.Lato
+        FontWeight: =FontWeight.Semibold
+        Size: =16
+        Text: ="Project"
+        X: =347
+        Y: =188
+        ZIndex: =4
+
+    lblCommentHeader As label:
+        Font: =Font.Lato
+        FontWeight: =FontWeight.Semibold
+        Size: =16
+        Text: ="Comment"
+        X: =609
+        Y: =188
+        ZIndex: =5
+
+    lblLastModifiedHeader As label:
+        Font: =Font.Lato
+        FontWeight: =FontWeight.Semibold
+        Size: =16
+        Text: ="Last Modified"
+        X: =924
+        Y: =188
+        ZIndex: =6
+
+    lblLastModifiedHeader_1 As label:
+        Font: =Font.Lato
+        Size: =15
+        Text: ="Search"
+        Width: =90
+        X: =92
+        Y: =119
+        ZIndex: =7
+
+    txtSearch As text:
+        Default: =""
+        Size: =15
+        Width: =227
+        X: =182
+        Y: =119
+        ZIndex: =8
+
+    icnNewItem As icon.Add:
+        Height: =40
+        Icon: =Icon.Add
+        OnSelect: |-
+            =Navigate('detail screen',ScreenTransition.Cover,{varDisplayProject:Blank()})
+        Width: =40
+        X: =1157
+        Y: =119
+        ZIndex: =9
+
+    lblNewItem As label:
+        Font: =Font.Lato
+        Size: =15
+        Text: ="Create New Item"
+        Width: =180
+        X: =977
+        Y: =119
+        ZIndex: =10
+
+    icnRefresh As icon.Reload:
+        Height: =40
+        Icon: =Icon.Reload
+        OnSelect: |-
+            =Refresh(ProjectTeamManagementList);
+            ClearCollect(colProjectManagement,ProjectTeamManagementList)
+        Width: =40
+        X: =1225
+        Y: =119
+        ZIndex: =11
+
